@@ -39,10 +39,10 @@ Two more options
 ```js
 import * as modularify from 'modularify'; // babel 6 issue
 
-modularify.transform(<codeString>, {
+modularify.transform('<codeString>', {
         globals: {
           window: 'global',
-          document: ['global', document']
+          document: ['global', 'document']
         },
         exports: {
           window: 'exports'
