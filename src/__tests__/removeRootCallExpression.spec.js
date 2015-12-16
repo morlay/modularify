@@ -21,9 +21,29 @@ describe(__filename, () => {
       `, code);
     });
 
+    it('should ignore other call expression', () => {
+      const code = babel.transform(`
+        componentHandle = (function(a,b){
+          const test = 1;
+        })(a,b,c)
+        componentHandler.register({});
+      `, {
+        plugins: [
+          removeRootCallExpression
+        ]
+      }).code;
+
+      expectCodeEql(`
+        componentHandle = (function(a,b){
+          const test = 1;
+        })(a,b,c)
+        componentHandler.register({});
+      `, code);
+    });
+
     it('should remove root call expression and re-assign variable names', () => {
       const code = babel.transform(`
-        (function(aaa,b){
+        (function(aaa, b){
           const test = 1;
         })(a,b,c)
       `, {
