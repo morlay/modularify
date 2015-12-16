@@ -8,6 +8,7 @@ describe(__filename, () => {
     it('should replace to assignment', () => {
       const code = babel.transform(`
         window;
+        window.call();
         window['Button'] = Button;
         function a() {
           window.Button = Button;
@@ -24,6 +25,7 @@ describe(__filename, () => {
 
       expectCodeEql(`
         window;
+        window.call();
         exports['Button'] = Button;
         function a() {
           exports.Button = Button;

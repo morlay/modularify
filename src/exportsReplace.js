@@ -4,7 +4,7 @@ export default function ({ types: t }) {
       exit(path, { opts }) {
         const targets = opts.exports || {};
         const name = path.get('object').node.name;
-        if (targets[name]) {
+        if (t.isAssignmentExpression(path.parent) && targets[name]) {
           path.get('object').replaceWith(t.identifier(targets[name]));
         }
       }

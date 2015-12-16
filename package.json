@@ -1,6 +1,6 @@
 {
   "name": "modularify",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "global is eval",
   "main": "lib/index.js",
   "config": {
@@ -31,5 +31,13 @@
     "eslint-config-airbnb": "^2.1.0",
     "istanbul": "^1.0.0-alpha.2",
     "mocha": "^2.3.4"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/morlay/modularify.git"
+  },
+  "bugs": {
+    "url": "https://github.com/morlay/modularify/issues"
+  },
+  "homepage": "https://github.com/morlay/modularify#readme"
 }
