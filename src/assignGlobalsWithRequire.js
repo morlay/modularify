@@ -2,12 +2,16 @@ export default function ({ types: t, template }) {
   const visitor = {
     ExpressionStatement(path, { opts }) {
       const globalPaths = opts.globals || {};
+      const ignores = [].concat(opts.ignores || []);
+
       const { parent, scope, parentPath } = path;
       if (!this.shouldSkip && t.isProgram(parent)) {
         const globals = scope.globals;
         const newBody = Object.keys(globals).reduce((body, globalKey) => {
           if (!globalPaths[globalKey]) {
-            console.log(`Identifier '${globalKey}' is still in global`);
+            if (ignores.indexOf(globalKey) === -1) {
+              console.log(`Identifier '${globalKey}' is still in global`);
+            }
             return body;
           }
 

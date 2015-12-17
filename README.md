@@ -31,21 +31,32 @@ exports['Button'] = Button;
 ### Options
 
 Could work with babel and could pass [babel options](https://babeljs.io/docs/usage/options/);
-Two more options
 
-* Options.globals
-* Options.exports
 
 ```js
 import * as modularify from 'modularify'; // babel 6 issue
 
-modularify.transform('<codeString>', {
-        globals: {
-          window: 'global',
-          document: ['global', 'document']
-        },
-        exports: {
-          window: 'exports'
-        }
-      });
+const opts = {
+  plugins: [
+    modularify.removeRootCallExpression,
+    [modularify.removeCallExpression, {
+      rules: [
+        'componentHandler'
+      ]
+    }]
+    [modularify.assignGlobalsWithRequire, {
+      globals: {
+        window: 'global',
+        document: 'global/document'
+      }
+    }],
+    [modularify.exportsReplace, {
+      exports: {
+        window: 'exports'
+      }
+    }]
+  ]
+}
+
+modularify.transform('<codeString>', opts);
 ```
