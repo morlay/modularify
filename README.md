@@ -40,7 +40,7 @@ const opts = {
   plugins: [
     modularify.removeRootCallExpression,
     [modularify.removeCallExpression, {
-      rules: [
+      callers: [
         'componentHandler'
       ]
     }]
